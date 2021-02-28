@@ -1,0 +1,81 @@
+.products {
+  flex: 1;
+  padding: 40px 80px;
+  &__header {
+    display: flex;
+  }
+  &__title {
+    font-size: 26px;
+    flex: 1 1 450px;
+    margin-right: 56px;
+    font-weight: 500;
+    & span {
+      color: #f9a109;
+    }
+  }
+  &__input {
+    height: 50px;
+    padding: 16px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    flex: 1 1 275px;
+    border: 2px solid transparent;
+    font-size: 16px;
+    &:hover,
+    &:focus {
+      border: 2px solid #f9a109;
+      transition: 0.2s;
+    }
+  }
+  &__lists {
+    margin-top: 57px;
+  }
+  &__block {
+  }
+}
+
+.products-block {
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__product {
+    background-color: #ffffff;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex: 0 0 182px;
+    max-width: 182px;
+    word-break: break-all;
+    align-items: flex-start;
+    margin-right: 20px;
+    margin-bottom: 25px;
+    & span {
+      flex: 1;
+      margin-right: 5px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    & button {
+      background-color: transparent;
+      font-weight: 700;
+
+      & svg {
+        width: 15px;
+        height: 15px;
+        fill: #c1c1c4;
+        &:hover,
+        &:focus {
+          transition: 0.15s;
+          fill: #f9a109;
+        }
+      }
+    }
+  }
+}

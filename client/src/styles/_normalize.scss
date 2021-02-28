@@ -9,6 +9,7 @@
     box-sizing: border-box;
   }
 }
+
 a {
   &:focus,
   &:active {
@@ -21,34 +22,41 @@ a {
     text-decoration: none;
   }
 }
+
 nav,
 footer,
 header,
 aside {
   display: block;
 }
+
 html,
 body {
   width: 100%;
   font-size: 100%;
   line-height: 1;
 }
+
 button {
   cursor: pointer;
 }
+
 ul {
   & li {
     list-style: none;
   }
 }
+
 input {
   &:focus {
     outline: none;
   }
 }
+
 img {
   vertical-align: top;
 }
+
 h1,
 h2,
 h3,

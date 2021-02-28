@@ -1,0 +1,65 @@
+.add-item {
+  padding: 34px;
+  padding-right: 40px;
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 33px;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+  &__section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    & label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      margin-left: 5px;
+    }
+    & input {
+      border: 2px solid #bdbdbd;
+      border-radius: 12px;
+      font-size: 15px;
+      padding: 17px;
+      &:hover,
+      &:focus {
+        border: 2px solid #f9a109;
+        transition: 0.2s;
+      }
+    }
+  }
+  &__buttons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  &__button {
+    font-size: 17px;
+    font-weight: 700;
+    background-color: transparent;
+    margin-right: 40px;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+    &--orange {
+      margin-right: 0;
+      padding: 15px 25px;
+      background-color: #f9a109;
+      border: 2px solid #f9a109;
+      color: #fff;
+      border-radius: 10px;
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        color: #f9a109;
+        transition: 0.2s;
+        text-decoration: none;
+      }
+    }
+  }
+}
