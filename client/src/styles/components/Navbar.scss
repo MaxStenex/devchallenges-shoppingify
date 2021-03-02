@@ -5,6 +5,8 @@
   justify-content: space-between;
   min-height: 100vh;
   background-color: #fff;
+  position: fixed;
+  width: 93px;
   &__logo {
     height: 42px;
     width: 42px;
@@ -40,22 +42,22 @@
   margin: 30px auto;
   background-color: #f9a109;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   &__image {
-    width: 30px;
-    height: 30px;
+    width: 50%;
+    height: 50%;
   }
   &__count {
     color: #fff;
     background-color: red;
     position: absolute;
     right: 0;
-    top: -10px;
+    top: -15px;
     font-size: 20px;
     padding: 3px 5px;
     border-radius: 3px;

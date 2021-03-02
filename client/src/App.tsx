@@ -7,7 +7,7 @@ import Items from "./pages/items";
 const App = () => {
   return (
     <Switch>
-      <Route path="/items" render={Items} />
+      <Route path="/items" component={Items} />
       <Route path="/" render={() => <Redirect to="/items" />} />
     </Switch>
   );

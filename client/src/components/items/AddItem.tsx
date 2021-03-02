@@ -3,6 +3,7 @@ import "../../styles/components/AddItem.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import api from "../../api";
+import { SidebarComponents } from "../../pages/items";
 
 export const createItemSchema = yup.object().shape({
   name: yup
@@ -19,7 +20,15 @@ export const createItemSchema = yup.object().shape({
   imageUrl: yup.string(),
 });
 
-export const AddItem = () => {
+type Props = {
+  changeSidebarComponent: (componentName: SidebarComponents) => void;
+};
+
+export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
+  const changeSidebarComponentOnShoppingList = () => {
+    changeSidebarComponent(SidebarComponents.ShoppingList);
+  };
+
   return (
     <section className="add-item">
       <h2 className="add-item__title">Add a new item</h2>
@@ -74,7 +83,13 @@ export const AddItem = () => {
               </ErrorMessage>
             </div>
             <div className="add-item__buttons">
-              <button className="add-item__button">cancel</button>
+              <button
+                onClick={changeSidebarComponentOnShoppingList}
+                type="button"
+                className="add-item__button"
+              >
+                cancel
+              </button>
               <button type="submit" className="add-item__button add-item__button--orange">
                 Save
               </button>
