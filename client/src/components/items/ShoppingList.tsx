@@ -1,6 +1,6 @@
 import BottleSvg from "../../images/bottle.svg";
-import { SidebarComponents } from "../../pages/items";
 import "../../styles/components/ShoppingList.scss";
+import { SidebarComponents } from "./Sidebar";
 
 type Props = {
   changeSidebarComponent: (componentName: SidebarComponents) => void;

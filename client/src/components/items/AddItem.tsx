@@ -3,7 +3,11 @@ import "../../styles/components/AddItem.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import api from "../../api";
-import { SidebarComponents } from "../../pages/items";
+import { SidebarComponents } from "./Sidebar";
+import { useContext } from "react";
+import { ItemsContext } from "../../state/items/context";
+import { addItem } from "../../state/items/actions";
+import { Product } from "../../types";
 
 export const createItemSchema = yup.object().shape({
   name: yup
@@ -25,6 +29,8 @@ type Props = {
 };
 
 export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
+  const { itemsDispatch } = useContext(ItemsContext);
+
   const changeSidebarComponentOnShoppingList = () => {
     changeSidebarComponent(SidebarComponents.ShoppingList);
   };
@@ -38,12 +44,22 @@ export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
         onSubmit={({ name, note, imageUrl, category }, { resetForm }) => {
           const createItem = async () => {
             try {
-              await api.post("/items/create", {
+              const res = await api.post("/items/create", {
                 name,
                 note,
                 imageUrl: imageUrl || null,
                 categoryTitle: category,
               });
+
+              const data = res.data;
+              const newItem: Product = {
+                id: data.id,
+                imageUrl: data.imageUrl,
+                note: data.note,
+                name: data.name,
+              };
+              itemsDispatch(addItem(newItem, category));
+
               resetForm();
             } catch (err) {
               console.log(err.response.data.message);

@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import api from "../../api";
+import { setCategories } from "../../state/items/actions";
+import { ItemsContext } from "../../state/items/context";
 import "../../styles/components/Products.scss";
 import { Category, Product } from "../../types";
 
 export const Products = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { itemsState, itemsDispatch } = useContext(ItemsContext);
+
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await api.get("/categories");
-
-      setCategories(res.data);
+      itemsDispatch(setCategories(res.data));
     };
     fetchCategories();
-  }, []);
+  }, [itemsDispatch]);
   return (
     <section className="products">
       <header className="products__header">
@@ -22,7 +24,7 @@ export const Products = () => {
         <input type="text" placeholder="search item" className="products__input" />
       </header>
       <div className="products__lists">
-        {categories.map((category: Category) => (
+        {itemsState.categories.map((category: Category) => (
           <div key={category.id} className="products__block products-block">
             <h3 className="products-block__title">{category.title}</h3>
             <ul className="products-block__products">
