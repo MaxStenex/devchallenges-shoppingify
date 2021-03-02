@@ -21,7 +21,7 @@ const Items = () => {
       <div className="items-page">
         <Navbar />
         <main className="items-page__main">
-          <Products />
+          <Products changeSidebarComponent={changeSidebarComponent} />
           <div className="items-page__sidebar">
             <Sidebar
               componentName={sidebarComponentName}

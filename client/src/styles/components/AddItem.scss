@@ -1,6 +1,8 @@
 .add-item {
   padding: 34px;
   padding-right: 40px;
+  position: fixed;
+  min-height: 100vh;
   &__title {
     font-size: 24px;
     font-weight: 500;

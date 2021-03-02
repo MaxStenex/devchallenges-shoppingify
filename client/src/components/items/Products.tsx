@@ -1,11 +1,16 @@
 import { useEffect, useContext } from "react";
 import api from "../../api";
-import { setCategories } from "../../state/items/actions";
+import { addItemInShoppingList, setCategories } from "../../state/items/actions";
 import { ItemsContext } from "../../state/items/context";
 import "../../styles/components/Products.scss";
 import { Category, Product } from "../../types";
+import { SidebarComponents } from "./Sidebar";
 
-export const Products = () => {
+type Props = {
+  changeSidebarComponent: (componentName: SidebarComponents) => void;
+};
+
+export const Products: React.FC<Props> = ({ changeSidebarComponent }) => {
   const { itemsState, itemsDispatch } = useContext(ItemsContext);
 
   useEffect(() => {
@@ -15,6 +20,10 @@ export const Products = () => {
     };
     fetchCategories();
   }, [itemsDispatch]);
+  const onAddItemInShoppingList = (item: Product, categoryTitle: string) => {
+    itemsDispatch(addItemInShoppingList(item, categoryTitle));
+  };
+
   return (
     <section className="products">
       <header className="products__header">
@@ -30,8 +39,14 @@ export const Products = () => {
             <ul className="products-block__products">
               {category.items.map((product: Product) => (
                 <li key={product.id} className="products-block__product">
-                  <span>{product.name}</span>
-                  <button>
+                  <span
+                    onClick={() => changeSidebarComponent(SidebarComponents.ItemDetails)}
+                  >
+                    {product.name}
+                  </span>
+                  <button
+                    onClick={() => onAddItemInShoppingList(product, category.title)}
+                  >
                     <svg
                       height="10px"
                       viewBox="0 0 448 448"

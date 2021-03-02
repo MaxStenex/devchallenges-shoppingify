@@ -56,11 +56,17 @@
     align-items: flex-start;
     margin-right: 20px;
     margin-bottom: 25px;
+
     & span {
       flex: 1;
       margin-right: 5px;
       font-size: 16px;
       font-weight: 500;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
     }
     & button {
       background-color: transparent;

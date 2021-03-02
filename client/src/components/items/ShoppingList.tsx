@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import BottleSvg from "../../images/bottle.svg";
+import { ItemsContext } from "../../state/items/context";
 import "../../styles/components/ShoppingList.scss";
 import { SidebarComponents } from "./Sidebar";
 
@@ -7,6 +9,8 @@ type Props = {
 };
 
 export const ShoppingList: React.FC<Props> = ({ changeSidebarComponent }) => {
+  const { itemsState } = useContext(ItemsContext);
+
   const changeSidebarComponentOnAddItem = () => {
     changeSidebarComponent(SidebarComponents.AddItem);
   };
@@ -24,28 +28,19 @@ export const ShoppingList: React.FC<Props> = ({ changeSidebarComponent }) => {
           </div>
         </div>
         <h2 className="shopping-list__title">Shopping list</h2>
-        <div className="shopping-list__section shopping-section">
-          <h4 className="shopping-section__title">Fruit and vegetables</h4>
-          <ul className="shopping-section__list">
-            <li className="shopping-section__item">
-              <span>Avocado</span>
-              <button>3 pcs</button>
-            </li>
-            <li className="shopping-section__item">
-              <span>Pre-cooked corn 450g</span>
-              <button>3 pcs</button>
-            </li>
-          </ul>
-        </div>
-        <div className="shopping-list__section shopping-section">
-          <h4 className="shopping-section__title">Meat and Fish</h4>
-          <ul className="shopping-section__list">
-            <li className="shopping-section__item">
-              <span>Chicken</span>
-              <button>1 pcs</button>
-            </li>
-          </ul>
-        </div>
+        {itemsState.shoppingList.map((category) => (
+          <div key={category.id} className="shopping-list__section shopping-section">
+            <h4 className="shopping-section__title">{category.title}</h4>
+            <ul className="shopping-section__list">
+              {category.items.map((item) => (
+                <li key={item.id} className="shopping-section__item">
+                  <span>{item.name}</span>
+                  <button>3 pcs</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
       <footer className="shopping-list__footer">
         <input placeholder="Enter a name" type="text" />
