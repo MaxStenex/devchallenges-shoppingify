@@ -37,4 +37,9 @@ export class ItemService {
     });
     return createdItem;
   }
+
+  async findOne(itemId: number): Promise<Item> {
+    const item = await this.itemsRepository.findOne(itemId);
+    return item;
+  }
 }

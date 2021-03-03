@@ -2,7 +2,9 @@
   padding: 34px;
   padding-right: 40px;
   position: fixed;
-  min-height: 100vh;
+  height: 100vh;
+  width: 389px;
+  overflow: auto;
   &__title {
     font-size: 24px;
     font-weight: 500;
@@ -70,5 +72,30 @@
     margin-left: 5px;
     margin-top: 5px;
     font-weight: 700;
+  }
+  &__categories {
+    display: none;
+    margin-top: 12px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 8px;
+    max-height: 140px;
+    overflow-y: auto;
+    &--visible {
+      display: block;
+    }
+    & li {
+      color: #828282, 100%;
+      font-weight: 500;
+      font-size: 18px;
+      word-break: break-all;
+      padding: 12px 12px 12px 22px;
+      border-radius: 12px;
+      &:hover,
+      &:focus {
+        background-color: #f2f2f2;
+        color: #34333a, 100%;
+      }
+    }
   }
 }

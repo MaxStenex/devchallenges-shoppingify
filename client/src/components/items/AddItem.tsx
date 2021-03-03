@@ -4,10 +4,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import api from "../../api";
 import { SidebarComponents } from "./Sidebar";
-import { useContext } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 import { ItemsContext } from "../../state/items/context";
 import { addItem } from "../../state/items/actions";
 import { Product } from "../../types";
+import { useEffect } from "react";
 
 export const createItemSchema = yup.object().shape({
   name: yup
@@ -29,7 +30,32 @@ type Props = {
 };
 
 export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
-  const { itemsDispatch } = useContext(ItemsContext);
+  const { itemsState, itemsDispatch } = useContext(ItemsContext);
+  const namesOfCategories = useMemo(
+    () =>
+      itemsState.categories.reduce<string[]>((acc, curr) => {
+        acc.push(curr.title);
+        return acc;
+      }, []),
+    [itemsState.categories]
+  );
+
+  const [categoriesPopupOpened, setCategoriesPopupOpened] = useState(false);
+  const categoryInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const onCategoryInputClick = (evt: any) => {
+      if (evt.path.includes(categoryInputRef.current)) {
+        setCategoriesPopupOpened(true);
+      } else {
+        setCategoriesPopupOpened(false);
+      }
+    };
+    document.addEventListener("click", onCategoryInputClick);
+
+    return () => {
+      document.removeEventListener("click", onCategoryInputClick);
+    };
+  }, []);
 
   const changeSidebarComponentOnShoppingList = () => {
     changeSidebarComponent(SidebarComponents.ShoppingList);
@@ -68,7 +94,7 @@ export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
           createItem();
         }}
       >
-        {() => (
+        {({ setValues, getFieldProps }) => (
           <Form className="add-item__form">
             <div className="add-item__section">
               <label>Name</label>
@@ -93,10 +119,30 @@ export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
             </div>
             <div className="add-item__section">
               <label>Category</label>
-              <Field name="category" placeholder="Enter a category" type="text" />
+              <input
+                autoComplete="off"
+                {...getFieldProps("category")}
+                ref={categoryInputRef}
+                placeholder="Enter a category"
+                type="text"
+              />
               <ErrorMessage name="category">
                 {(msg) => <span className="add-item__error">{msg}</span>}
               </ErrorMessage>
+              <ul
+                className={`add-item__categories  ${
+                  categoriesPopupOpened ? "add-item__categories--visible" : ""
+                }`}
+              >
+                {namesOfCategories.map((name) => (
+                  <li
+                    onClick={() => setValues((values) => ({ ...values, category: name }))}
+                    key={name}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="add-item__buttons">
               <button
