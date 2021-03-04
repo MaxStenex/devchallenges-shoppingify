@@ -29,4 +29,9 @@ export class CategoriesService {
   async findAll(): Promise<Category[]> {
     return this.categoryRepository.find({ relations: ["items"] });
   }
+
+  async deleteCategory(categoryId: number): Promise<boolean> {
+    await this.categoryRepository.delete(categoryId);
+    return true;
+  }
 }

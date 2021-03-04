@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -24,5 +25,10 @@ export class ItemController {
   @Get("/:id")
   findOne(@Param("id") itemId: string): Promise<Item> {
     return this.itemService.findOne(parseInt(itemId));
+  }
+
+  @Delete("/:id")
+  deleteOne(@Param("id") itemId: string): Promise<HttpStatus> {
+    return this.itemService.deleteOne(parseInt(itemId));
   }
 }

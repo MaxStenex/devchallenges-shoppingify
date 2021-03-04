@@ -1,6 +1,10 @@
 import { useEffect, useContext } from "react";
 import api from "../../api";
-import { addItemInShoppingList, setCategories } from "../../state/items/actions";
+import {
+  addItemInShoppingList,
+  setCategories,
+  setItemDetailsId,
+} from "../../state/items/actions";
 import { ItemsContext } from "../../state/items/context";
 import "../../styles/components/Products.scss";
 import { Category, Product } from "../../types";
@@ -20,8 +24,13 @@ export const Products: React.FC<Props> = ({ changeSidebarComponent }) => {
     };
     fetchCategories();
   }, [itemsDispatch]);
+
   const onAddItemInShoppingList = (item: Product, categoryTitle: string) => {
     itemsDispatch(addItemInShoppingList(item, categoryTitle));
+  };
+  const showItemDetails = (itemId: number) => {
+    changeSidebarComponent(SidebarComponents.ItemDetails);
+    itemsDispatch(setItemDetailsId(itemId));
   };
 
   return (
@@ -40,7 +49,9 @@ export const Products: React.FC<Props> = ({ changeSidebarComponent }) => {
               {category.items.map((product: Product) => (
                 <li key={product.id} className="products-block__product">
                   <span
-                    onClick={() => changeSidebarComponent(SidebarComponents.ItemDetails)}
+                    onClick={() => {
+                      showItemDetails(product.id);
+                    }}
                   >
                     {product.name}
                   </span>

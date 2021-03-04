@@ -4,6 +4,8 @@
   position: fixed;
   height: 100vh;
   overflow: auto;
+  width: 389px;
+  word-break: break-all;
   &__back {
     color: #f9a109;
     font-weight: 700;

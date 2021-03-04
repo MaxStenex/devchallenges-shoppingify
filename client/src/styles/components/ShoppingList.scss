@@ -112,31 +112,71 @@
     font-size: 14px;
     color: #828282;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   &__list {
   }
   &__item {
-    margin-bottom: 33px;
+  }
+
+  .shopping-item {
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    & span {
+
+    &__name {
       font-weight: 500;
       font-size: 18px;
+      word-break: break-all;
+      flex: 1 0;
+      margin-right: 5px;
     }
-    & button {
+    &__buttons {
+      padding: 6px 9px 6px 0px;
+      &--opened {
+        display: flex;
+        background-color: #fff;
+        border-radius: 12px;
+        align-items: center;
+      }
+    }
+    &__count {
       color: #f9a109;
       padding: 7px 20px;
-      font-size: 12px;
+      font-size: 14px;
       background-color: transparent;
       border: 2px solid #f9a109;
       border-radius: 24px;
+      margin-right: 5px;
       &:hover,
       &:focus {
         background-color: #fff;
         transition: 0.15s;
       }
+    }
+    &__delete {
+      display: block;
+      height: 40px;
+      padding: 6px;
+      background-color: #f9a109;
+      cursor: pointer;
+      border-radius: 12px;
+      margin-right: 5px;
+    }
+    &__minus {
+      font-size: 40px;
+      margin-right: 5px;
+      color: #f9a109;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+    }
+    &__plus {
+      background-color: transparent;
+      font-size: 40px;
+      color: #f9a109;
     }
   }
 }

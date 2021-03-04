@@ -129,20 +129,24 @@ export const AddItem: React.FC<Props> = ({ changeSidebarComponent }) => {
               <ErrorMessage name="category">
                 {(msg) => <span className="add-item__error">{msg}</span>}
               </ErrorMessage>
-              <ul
-                className={`add-item__categories  ${
-                  categoriesPopupOpened ? "add-item__categories--visible" : ""
-                }`}
-              >
-                {namesOfCategories.map((name) => (
-                  <li
-                    onClick={() => setValues((values) => ({ ...values, category: name }))}
-                    key={name}
-                  >
-                    {name}
-                  </li>
-                ))}
-              </ul>
+              {namesOfCategories.length > 0 && (
+                <ul
+                  className={`add-item__categories  ${
+                    categoriesPopupOpened ? "add-item__categories--visible" : ""
+                  }`}
+                >
+                  {namesOfCategories.map((name) => (
+                    <li
+                      onClick={() =>
+                        setValues((values) => ({ ...values, category: name }))
+                      }
+                      key={name}
+                    >
+                      {name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div className="add-item__buttons">
               <button

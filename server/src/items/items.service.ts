@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Category } from "src/categories/categories.entity";
 import { CategoriesService } from "src/categories/categories.service";
-import { Repository } from "typeorm";
+import { getConnection, Repository } from "typeorm";
 import { CreateItemDto } from "./dto/create-item.dto";
 import { Item } from "./items.entity";
 
@@ -39,7 +40,31 @@ export class ItemService {
   }
 
   async findOne(itemId: number): Promise<Item> {
-    const item = await this.itemsRepository.findOne(itemId);
+    const item = await this.itemsRepository.findOne(itemId, {
+      relations: ["category"],
+    });
     return item;
+  }
+
+  async deleteOne(itemId: number): Promise<HttpStatus> {
+    try {
+      const item = await this.itemsRepository.findOne(itemId, {
+        relations: ["category"],
+      });
+      await this.itemsRepository.delete(item);
+      const categoryItems = await getConnection().query(
+        `SELECT *
+        FROM category c
+        INNER JOIN item i ON c.id = i."categoryId"
+        WHERE c.id = ${item.category.id};`,
+      );
+      if (categoryItems.length < 1) {
+        await this.categoriesService.deleteCategory(item.category.id);
+      }
+
+      return HttpStatus.OK;
+    } catch (error) {
+      return HttpStatus.BAD_REQUEST;
+    }
   }
 }
