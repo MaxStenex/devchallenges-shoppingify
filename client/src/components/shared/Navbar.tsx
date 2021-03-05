@@ -7,8 +7,13 @@ import ItemsSvg from "../../images/items.svg";
 import StatisticSvg from "../../images/statistic.svg";
 
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ItemsContext } from "../../state/items/context";
 
 export const Navbar = () => {
+  const { itemsState } = useContext(ItemsContext);
+  const itemsInCart = itemsState.shoppingList.length;
+
   return (
     <div className="navbar">
       <Link to="/" className="navbar__logo">
@@ -27,7 +32,7 @@ export const Navbar = () => {
       </div>
       <div className="navbar__cart navbar-cart">
         <img src={CartSvg} alt="#" className="navbar-cart__image" />
-        <div className="navbar-cart__count">3</div>
+        <div className="navbar-cart__count">{itemsInCart ? itemsInCart : "0"}</div>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ export interface Product {
   name: string;
   note?: string;
   imageUrl?: string;
-  amount?: string;
 }
 
 export interface Category {

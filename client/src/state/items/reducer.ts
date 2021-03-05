@@ -98,6 +98,18 @@ export const itemsReducer = (
       };
     }
 
+    case ItemsActionTypes.DELETE_ITEM_FROM_SHOPPING_LIST: {
+      return {
+        ...state,
+        shoppingList: state.shoppingList
+          .map((c) => ({
+            ...c,
+            items: [...c.items.filter((item) => item.id !== action.payload.itemId)],
+          }))
+          .filter((c) => c.items.length > 0),
+      };
+    }
+
     default:
       return state;
   }

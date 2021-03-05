@@ -6,6 +6,7 @@ export enum ItemsActionTypes {
   ADD_ITEM_IN_SHOPPING_LIST = "items_ADD_ITEM_IN_SHOPPING_LIST",
   SET_ITEM_DETAILS_ID = "items_SET_ITEM_DETAILS_ID",
   DELETE_ITEM = "items_DELETE_ITEM",
+  DELETE_ITEM_FROM_SHOPPING_LIST = "items_DELETE_ITEM_FROM_SHOPPING_LIST",
 }
 
 export type ItemsActions =
@@ -13,7 +14,8 @@ export type ItemsActions =
   | AddItemType
   | AddItemToShoppingListType
   | SetItemDetailsIdType
-  | DeleteItemType;
+  | DeleteItemType
+  | DeleteItemFromShoppingListType;
 
 type SetCategoriesType = {
   type: ItemsActionTypes.SET_CATEGORIES;
@@ -86,4 +88,18 @@ export const deleteItem = (itemId: number): DeleteItemType => ({
   payload: {
     itemId,
   },
+});
+
+type DeleteItemFromShoppingListType = {
+  type: ItemsActionTypes.DELETE_ITEM_FROM_SHOPPING_LIST;
+  payload: {
+    itemId: number;
+  };
+};
+
+export const deleteItemFromShoppingList = (
+  itemId: number
+): DeleteItemFromShoppingListType => ({
+  type: ItemsActionTypes.DELETE_ITEM_FROM_SHOPPING_LIST,
+  payload: { itemId },
 });

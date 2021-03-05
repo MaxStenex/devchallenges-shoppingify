@@ -133,7 +133,7 @@
       margin-right: 5px;
     }
     &__buttons {
-      padding: 6px 9px 6px 0px;
+      height: 45px;
       &--opened {
         display: flex;
         background-color: #fff;
@@ -141,23 +141,9 @@
         align-items: center;
       }
     }
-    &__count {
-      color: #f9a109;
-      padding: 7px 20px;
-      font-size: 14px;
-      background-color: transparent;
-      border: 2px solid #f9a109;
-      border-radius: 24px;
-      margin-right: 5px;
-      &:hover,
-      &:focus {
-        background-color: #fff;
-        transition: 0.15s;
-      }
-    }
     &__delete {
       display: block;
-      height: 40px;
+      height: 100%;
       padding: 6px;
       background-color: #f9a109;
       cursor: pointer;
@@ -166,17 +152,32 @@
     }
     &__minus {
       font-size: 40px;
-      margin-right: 5px;
       color: #f9a109;
       height: 100%;
       display: flex;
       align-items: center;
       background-color: transparent;
+      margin-right: 5px;
+    }
+    &__count {
+      color: #f9a109;
+      padding: 7px 20px;
+      font-size: 14px;
+      background-color: transparent;
+      border: 2px solid #f9a109;
+      border-radius: 24px;
+      margin: 5px 5px 5px 0px;
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        transition: 0.15s;
+      }
     }
     &__plus {
       background-color: transparent;
       font-size: 40px;
       color: #f9a109;
+      margin-right: 5px;
     }
   }
 }
