@@ -8,7 +8,7 @@ import {
 import { ItemsContext } from "../../state/items/context";
 import "../../styles/components/Products.scss";
 import { Category, Product } from "../../types";
-import { SidebarComponents } from "./Sidebar";
+import { SidebarComponents } from "../shared/Sidebar";
 
 type Props = {
   changeSidebarComponent: (componentName: SidebarComponents) => void;
