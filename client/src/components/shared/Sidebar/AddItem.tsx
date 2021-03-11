@@ -1,13 +1,13 @@
-import "../../styles/components/AddItem.scss";
+import "../../../styles/components/AddItem.scss";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import api from "../../api";
-import { SidebarComponents } from "./Sidebar";
+import api from "../../../api";
+import { SidebarComponents } from "./";
 import { useContext, useMemo, useRef, useState } from "react";
-import { ItemsContext } from "../../state/items/context";
-import { addItem } from "../../state/items/actions";
-import { Product } from "../../types";
+import { ItemsContext } from "../../../state/items/context";
+import { addItem } from "../../../state/items/actions";
+import { Product } from "../../../types";
 import { useEffect } from "react";
 
 export const createItemSchema = yup.object().shape({

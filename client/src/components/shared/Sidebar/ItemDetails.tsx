@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import api from "../../api";
-import { addItemInShoppingList, deleteItem } from "../../state/items/actions";
-import { ItemsContext } from "../../state/items/context";
-import "../../styles/components/ItemDetails.scss";
-import { Product } from "../../types";
-import { SidebarComponents } from "./Sidebar";
+import api from "../../../api";
+import { addItemInShoppingList, deleteItem } from "../../../state/items/actions";
+import { ItemsContext } from "../../../state/items/context";
+import "../../../styles/components/ItemDetails.scss";
+import { Product } from "../../../types";
+import { SidebarComponents } from "./";
 
 type Props = {
   changeSidebarComponent: (componentName: SidebarComponents) => void;

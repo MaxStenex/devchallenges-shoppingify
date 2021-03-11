@@ -15,6 +15,9 @@ export class Item {
   @Column({ nullable: true })
   imageUrl: string;
 
+  @Column({ nullable: true })
+  countInShoppingList: number;
+
   @ManyToOne(() => Category, (category) => category.items)
   category: Category;
 }

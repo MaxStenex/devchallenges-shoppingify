@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   note?: string;
   imageUrl?: string;
+  countInShoppingList?: number;
 }
 
 export interface Category {

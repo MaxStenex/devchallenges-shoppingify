@@ -4,6 +4,8 @@ import { Item } from "./items/items.entity";
 import { ItemModule } from "./items/items.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { Category } from "./categories/categories.entity";
+import { ShoppingHistoryModule } from "./shopping-history/shopping-history.module";
+import { ShoppingHistory } from "./shopping-history/shopping-history.entity";
 
 @Module({
   imports: [
@@ -14,11 +16,12 @@ import { Category } from "./categories/categories.entity";
       username: "postgres",
       password: "postgres",
       database: "shoppingify",
-      entities: [Item, Category],
+      entities: [Item, Category, ShoppingHistory],
       synchronize: true,
     }),
     ItemModule,
     CategoriesModule,
+    ShoppingHistoryModule,
   ],
 })
 export class AppModule {}

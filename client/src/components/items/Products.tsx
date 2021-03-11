@@ -26,7 +26,9 @@ export const Products: React.FC<Props> = ({ changeSidebarComponent }) => {
   }, [itemsDispatch]);
 
   const onAddItemInShoppingList = (item: Product, categoryTitle: string) => {
-    itemsDispatch(addItemInShoppingList(item, categoryTitle));
+    itemsDispatch(
+      addItemInShoppingList({ ...item, countInShoppingList: 0 }, categoryTitle)
+    );
   };
   const showItemDetails = (itemId: number) => {
     changeSidebarComponent(SidebarComponents.ItemDetails);

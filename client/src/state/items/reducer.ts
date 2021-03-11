@@ -89,11 +89,11 @@ export const itemsReducer = (
         itemDetailsId: null,
         shoppingList: state.shoppingList.map((c) => ({
           ...c,
-          items: [...c.items.filter((item) => item.id !== action.payload.itemId)],
+          items: c.items.filter((item) => item.id !== action.payload.itemId),
         })),
         categories: state.categories.map((c) => ({
           ...c,
-          items: [...c.items.filter((item) => item.id !== action.payload.itemId)],
+          items: c.items.filter((item) => item.id !== action.payload.itemId),
         })),
       };
     }
@@ -104,9 +104,32 @@ export const itemsReducer = (
         shoppingList: state.shoppingList
           .map((c) => ({
             ...c,
-            items: [...c.items.filter((item) => item.id !== action.payload.itemId)],
+            items: c.items.filter((item) => item.id !== action.payload.itemId),
           }))
           .filter((c) => c.items.length > 0),
+      };
+    }
+
+    case ItemsActionTypes.CHANGE_COUNT_OF_PRODUCT_IN_SHOPPING_LIST: {
+      return {
+        ...state,
+        shoppingList: state.shoppingList.map((c) => ({
+          ...c,
+          items: c.items.map((item) => {
+            if (item.countInShoppingList === 0 && action.payload.count < 0) {
+              return { ...item };
+            }
+
+            if (action.payload.itemId === item.id) {
+              return {
+                ...item,
+                countInShoppingList:
+                  (item.countInShoppingList || 0) + action.payload.count,
+              };
+            }
+            return { ...item };
+          }),
+        })),
       };
     }
 

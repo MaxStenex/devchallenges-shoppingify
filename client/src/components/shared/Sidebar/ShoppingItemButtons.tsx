@@ -1,15 +1,18 @@
-import DeleteSvg from "../../images/trash.svg";
+import DeleteSvg from "../../../images/trash.svg";
 import { useContext, useState } from "react";
-import { deleteItemFromShoppingList } from "../../state/items/actions";
-import { ItemsContext } from "../../state/items/context";
+import {
+  changeCountOfProductInShoppingList,
+  deleteItemFromShoppingList,
+} from "../../../state/items/actions";
+import { ItemsContext } from "../../../state/items/context";
 
 type Props = {
   itemId: number;
+  countOfProduct: number;
 };
 
-export const ShoppingItemButtons: React.FC<Props> = ({ itemId }) => {
+export const ShoppingItemButtons: React.FC<Props> = ({ itemId, countOfProduct }) => {
   const [buttonsOpened, setButtonsOpened] = useState(false);
-  const [countOfItem, setCountOfItem] = useState(0);
   const { itemsDispatch } = useContext(ItemsContext);
 
   const toggleButtonsMenu = () => {
@@ -18,11 +21,15 @@ export const ShoppingItemButtons: React.FC<Props> = ({ itemId }) => {
   const removeItemFromList = (itemId: number) => {
     itemsDispatch(deleteItemFromShoppingList(itemId));
   };
-  const changeCountOfItem = (amount: number) => {
-    if ((countOfItem === 0 && amount === -1) || countOfItem === 99) {
+  const changeCountOfItem = (itemId: number, changeAmount: number) => {
+    if (countOfProduct === 0 && changeAmount < 0) {
       return;
     }
-    setCountOfItem((oldCount) => oldCount + amount);
+    if (countOfProduct >= 99 && changeAmount > 0) {
+      return;
+    }
+
+    itemsDispatch(changeCountOfProductInShoppingList(itemId, changeAmount));
   };
 
   return (
@@ -39,19 +46,25 @@ export const ShoppingItemButtons: React.FC<Props> = ({ itemId }) => {
             className="shopping-item__delete"
             onClick={() => removeItemFromList(itemId)}
           />
-          <button onClick={() => changeCountOfItem(-1)} className="shopping-item__minus">
+          <button
+            onClick={() => changeCountOfItem(itemId, -1)}
+            className="shopping-item__minus"
+          >
             -
           </button>
           <button onClick={toggleButtonsMenu} className="shopping-item__count">
-            {countOfItem} pcs
+            {countOfProduct} pcs
           </button>
-          <button onClick={() => changeCountOfItem(1)} className="shopping-item__plus">
+          <button
+            onClick={() => changeCountOfItem(itemId, 1)}
+            className="shopping-item__plus"
+          >
             +
           </button>
         </>
       ) : (
         <button onClick={toggleButtonsMenu} className="shopping-item__count">
-          {countOfItem} pcs
+          {countOfProduct} pcs
         </button>
       )}
     </div>

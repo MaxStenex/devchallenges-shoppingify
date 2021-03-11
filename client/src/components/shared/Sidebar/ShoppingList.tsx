@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import BottleSvg from "../../images/bottle.svg";
-import { ItemsContext } from "../../state/items/context";
-import "../../styles/components/ShoppingList.scss";
+import BottleSvg from "../../../images/bottle.svg";
+import { ItemsContext } from "../../../state/items/context";
+import "../../../styles/components/ShoppingList.scss";
 import { ShoppingItemButtons } from "./ShoppingItemButtons";
-import { SidebarComponents } from "./Sidebar";
+import { SidebarComponents } from "./";
 
 type Props = {
   changeSidebarComponent: (componentName: SidebarComponents) => void;
@@ -36,7 +36,10 @@ export const ShoppingList: React.FC<Props> = ({ changeSidebarComponent }) => {
               {category.items.map((item) => (
                 <li key={item.id} className="shopping-section__item shopping-item">
                   <span className="shopping-item__name">{item.name}</span>
-                  <ShoppingItemButtons itemId={item.id} />
+                  <ShoppingItemButtons
+                    itemId={item.id}
+                    countOfProduct={item.countInShoppingList || 0}
+                  />
                 </li>
               ))}
             </ul>
