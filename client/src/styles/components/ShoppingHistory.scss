@@ -56,8 +56,9 @@
     border-radius: 8px;
   }
   &__arrow {
-    width: 15px;
     margin-left: 32px;
-    cursor: pointer;
+    & img {
+      width: 15px;
+    }
   }
 }

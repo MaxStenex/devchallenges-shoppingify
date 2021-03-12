@@ -1,0 +1,52 @@
+.history-details {
+  padding: 40px 100px;
+  &__back {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f9a109;
+    margin-bottom: 35px;
+    display: block;
+    text-decoration: none;
+  }
+  &__title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  &__date {
+    font-size: 12px;
+    color: rgba(193, 193, 196, 1);
+    margin-bottom: 54px;
+  }
+  &__categories {
+  }
+  &__category {
+  }
+}
+
+.history-category {
+  margin-bottom: 50px;
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__product {
+    flex: 0 0 176px;
+    margin-right: 18px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    height: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+  }
+}
