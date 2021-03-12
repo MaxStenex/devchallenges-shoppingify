@@ -13,6 +13,10 @@ export class ItemService {
     private readonly categoriesService: CategoriesService,
   ) {}
 
+  async findByIds(ids: number[]): Promise<Item[]> {
+    return this.itemsRepository.findByIds(ids);
+  }
+
   async findAll(): Promise<Item[]> {
     return this.itemsRepository.find();
   }

@@ -1,9 +1,10 @@
-import { Category } from "src/categories/categories.entity";
+import { Item } from "src/items/items.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -21,6 +22,7 @@ export class ShoppingHistory {
   @CreateDateColumn()
   createdAt: string;
 
-  @ManyToOne(() => Category, (category) => category.items)
-  category: Category;
+  @JoinTable()
+  @ManyToMany(() => Item, (item) => item.shoppingHistories)
+  items: Item[];
 }
