@@ -54,6 +54,10 @@
     padding: 4px 8px;
     border: 1px solid #56ccf2;
     border-radius: 8px;
+    &--cancelled {
+      color: rgba(235, 87, 87, 1);
+      border: 1px solid rgba(235, 87, 87, 1);
+    }
   }
   &__arrow {
     margin-left: 32px;

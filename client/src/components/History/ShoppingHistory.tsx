@@ -19,7 +19,15 @@ export const ShoppingHistory = () => {
                 <div className="history-section__date">
                   {new Date(shoppingHistory.createdAt).toLocaleDateString()}
                 </div>
-                <div className="history-section__status">{shoppingHistory.status}</div>
+                <div
+                  className={`history-section__status ${
+                    shoppingHistory.status === "cancelled"
+                      ? "history-section__status--cancelled"
+                      : ""
+                  }`}
+                >
+                  {shoppingHistory.status}
+                </div>
                 <Link
                   className="history-section__arrow"
                   to={`/history/${shoppingHistory.id}`}
