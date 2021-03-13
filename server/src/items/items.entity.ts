@@ -1,12 +1,6 @@
 import { Category } from "src/categories/categories.entity";
 import { ShoppingHistory } from "src/shopping-history/shopping-history.entity";
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Item {
@@ -25,6 +19,6 @@ export class Item {
   @ManyToOne(() => Category, (category) => category.items)
   category: Category;
 
-  @ManyToMany(() => ShoppingHistory, (shoppingHistory) => shoppingHistory.items)
-  shoppingHistories: ShoppingHistory[];
+  @ManyToOne(() => ShoppingHistory, (shoppingHistory) => shoppingHistory.items)
+  shoppingHistory: ShoppingHistory[];
 }

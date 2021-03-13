@@ -3,8 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -22,7 +21,6 @@ export class ShoppingHistory {
   @CreateDateColumn()
   createdAt: string;
 
-  @JoinTable()
-  @ManyToMany(() => Item, (item) => item.shoppingHistories)
+  @OneToMany(() => Item, (item) => item.shoppingHistory)
   items: Item[];
 }

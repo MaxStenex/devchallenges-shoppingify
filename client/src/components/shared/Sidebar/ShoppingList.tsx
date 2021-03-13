@@ -1,19 +1,47 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import BottleSvg from "../../../images/bottle.svg";
 import { ItemsContext } from "../../../state/items/context";
 import "../../../styles/components/ShoppingList.scss";
 import { ShoppingItemButtons } from "./ShoppingItemButtons";
 import { SidebarComponents } from "./";
+import api from "../../../api";
+import { clearShoppingList } from "../../../state/items/actions";
 
 type Props = {
   changeSidebarComponent: (componentName: SidebarComponents) => void;
 };
 
 export const ShoppingList: React.FC<Props> = ({ changeSidebarComponent }) => {
-  const { itemsState } = useContext(ItemsContext);
+  const [shoppingListName, setShoppingListName] = useState("");
+  const [isVisibleSubmitButtons, setIsVisibleSubmitButtons] = useState(false);
+  const { itemsState, itemsDispatch } = useContext(ItemsContext);
 
   const changeSidebarComponentOnAddItem = () => {
     changeSidebarComponent(SidebarComponents.AddItem);
+  };
+  const onSaveButtonClick = () => {
+    if (
+      shoppingListName.trim().length > 0 &&
+      shoppingListName.trim().length < 100 &&
+      itemsState.shoppingList.length > 0
+    ) {
+      setIsVisibleSubmitButtons(true);
+    }
+  };
+  const onCompleteButtonClick = async () => {
+    const itemsIds = itemsState.shoppingList.reduce<number[]>((acc, curr) => {
+      curr.items.map((item) => acc.push(item.id));
+      return acc;
+    }, []);
+
+    await api.post("/shopping-history", {
+      name: shoppingListName,
+      status: "complete",
+      itemsIds,
+    });
+    itemsDispatch(clearShoppingList());
+    setShoppingListName("");
+    setIsVisibleSubmitButtons(false);
   };
 
   return (
@@ -47,8 +75,27 @@ export const ShoppingList: React.FC<Props> = ({ changeSidebarComponent }) => {
         ))}
       </div>
       <footer className="shopping-list__footer">
-        <input placeholder="Enter a name" type="text" />
-        <button>Save</button>
+        {isVisibleSubmitButtons ? (
+          <>
+            <button className="shopping-list__cancel">cancel</button>
+            <button onClick={onCompleteButtonClick} className="shopping-list__complete">
+              Complete
+            </button>
+          </>
+        ) : (
+          <>
+            <input
+              value={shoppingListName}
+              onChange={(e) => setShoppingListName(e.currentTarget.value)}
+              placeholder="Enter a name"
+              type="text"
+              className="shopping-list__input"
+            />
+            <button onClick={onSaveButtonClick} className="shopping-list__save">
+              Save
+            </button>
+          </>
+        )}
       </footer>
     </section>
   );

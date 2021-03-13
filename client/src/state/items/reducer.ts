@@ -133,6 +133,10 @@ export const itemsReducer = (
       };
     }
 
+    case ItemsActionTypes.CLEAR_SHOPPING_LIST: {
+      return { ...state, shoppingList: [] };
+    }
+
     default:
       return state;
   }

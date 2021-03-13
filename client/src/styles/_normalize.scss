@@ -39,6 +39,7 @@ body {
 
 button {
   cursor: pointer;
+  background-color: transparent;
   &:hover,
   &:focus {
     outline: none;

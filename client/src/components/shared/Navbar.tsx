@@ -12,7 +12,10 @@ import { ItemsContext } from "../../state/items/context";
 
 export const Navbar = () => {
   const { itemsState } = useContext(ItemsContext);
-  const itemsInCart = itemsState.shoppingList.length;
+  const itemsInCart = itemsState.shoppingList.reduce(
+    (acc, curr) => curr.items.length + acc,
+    0
+  );
 
   return (
     <div className="navbar">

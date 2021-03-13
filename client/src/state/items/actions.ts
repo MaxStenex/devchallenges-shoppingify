@@ -8,6 +8,7 @@ export enum ItemsActionTypes {
   DELETE_ITEM = "items_DELETE_ITEM",
   DELETE_ITEM_FROM_SHOPPING_LIST = "items_DELETE_ITEM_FROM_SHOPPING_LIST",
   CHANGE_COUNT_OF_PRODUCT_IN_SHOPPING_LIST = "items_CHANGE_COUNT_OF_PRODUCT_IN_SHOPPING_LIST",
+  CLEAR_SHOPPING_LIST = "items_CLEAR_SHOPPING_LIST",
 }
 
 export type ItemsActions =
@@ -17,7 +18,8 @@ export type ItemsActions =
   | SetItemDetailsIdType
   | DeleteItemType
   | DeleteItemFromShoppingListType
-  | ChangeCountOfProductInShoppingListType;
+  | ChangeCountOfProductInShoppingListType
+  | ClearShoppingListType;
 
 type SetCategoriesType = {
   type: ItemsActionTypes.SET_CATEGORIES;
@@ -120,4 +122,12 @@ export const changeCountOfProductInShoppingList = (
 ): ChangeCountOfProductInShoppingListType => ({
   type: ItemsActionTypes.CHANGE_COUNT_OF_PRODUCT_IN_SHOPPING_LIST,
   payload: { count, itemId },
+});
+
+type ClearShoppingListType = {
+  type: ItemsActionTypes.CLEAR_SHOPPING_LIST;
+};
+
+export const clearShoppingList = (): ClearShoppingListType => ({
+  type: ItemsActionTypes.CLEAR_SHOPPING_LIST,
 });
